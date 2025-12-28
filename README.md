@@ -1,5 +1,11 @@
 # claude-code-ninja
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blueviolet)](https://claude.ai/code)
+
+> Custom slash commands for [Claude Code](https://claude.ai/code) - Anthropic's AI coding assistant CLI.
+> Automate GitHub issue workflows, PR creation, and more.
+
 A collection of battle-tested Claude Code custom commands for common development workflows.
 
 ## Installation
@@ -89,6 +95,10 @@ Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
 - Command file structure
 - Quality guidelines
 - Submitting new commands
+
+## Keywords
+
+`claude-code` `custom-commands` `slash-commands` `github-issues` `pull-requests` `developer-workflow` `automation` `anthropic` `ai-coding-assistant`
 
 ## License
 
