@@ -75,8 +75,23 @@ Complete GitHub issue workflow with structured phases, quality gates, and progre
 - Follows conventional commit format
 - Handles merge conflicts and error recovery
 
-**Requirements:**
-- GitHub CLI (`gh`) installed and authenticated
+**Prerequisites:**
+
+| Dependency | Required | Purpose | Installation |
+|------------|----------|---------|--------------|
+| GitHub CLI (`gh`) | Yes | Issue fetching, PR creation | [Install guide](https://cli.github.com/) |
+| GitHub MCP Server | Yes | GitHub API integration | [Setup docs](https://github.com/modelcontextprotocol/servers/tree/main/src/github) |
+| `code-review` plugin | Yes | Phase 5 code review | `claude plugins:install code-review` |
+| `frontend-design` plugin | For UI work | Phase 2 UI/UX design | `claude plugins:install frontend-design` |
+| Chrome for Claude | Optional | Screenshots/GIFs of UI changes | [Extension](https://chromewebstore.google.com/detail/claude-in-chrome/) |
+
+**Quick setup:**
+```bash
+# Install required plugins
+claude plugins:install code-review frontend-design
+```
+
+**Also requires:**
 - Git repository with GitHub remote
 
 ## Customization
