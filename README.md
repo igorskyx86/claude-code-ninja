@@ -12,6 +12,7 @@ A small collection of battle-tested Claude Code commands focused on GitHub issue
 
 - Consistent, phase-based workflow for issues and PRs
 - Safer changes with explicit planning and approval gates
+- Run multiple Claude Code sessions concurrently without stepping on each other
 - Less busywork: worktrees, issue comments, and PR creation are automated
 
 ## Install
