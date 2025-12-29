@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git worktree:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rebase:*)",
+      "Bash(git push:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git revert:*)",
+      "Bash(gh pr create:*)"
+    ]
+  }
+}
