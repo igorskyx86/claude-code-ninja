@@ -4,9 +4,9 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blueviolet)](https://claude.ai/code)
 
 > Custom slash commands for [Claude Code](https://claude.ai/code) - Anthropic's AI coding assistant CLI.
-> Automate GitHub issue workflows, PR creation, and more.
+> Automate GitHub issue workflows, codebase exploration, and session handoffs.
 
-A small collection of battle-tested Claude Code commands focused on GitHub issue workflows.
+A small collection of battle-tested Claude Code commands for structured development workflows.
 
 ## Why use it
 
@@ -70,6 +70,41 @@ Usage:
 ```bash
 /gh_issue 42
 /gh_issue https://github.com/owner/repo/issues/42
+```
+
+### `/explore <TOPIC_OR_QUESTION>`
+
+Guided codebase exploration for understanding code before implementation. Strictly read-only.
+
+Key features:
+- Uses Explore agents for thorough search
+- Asks clarifying questions to understand your goal
+- Produces structured output with file:line references
+- Output options: console, `.claude/explorations/`, or GitHub issue
+- Offers follow-up questions for deeper exploration
+
+Usage:
+
+```bash
+/explore authentication
+/explore "how do API endpoints handle errors"
+/explore state management
+```
+
+### `/handoff`
+
+Capture current session state for seamless continuation in a new conversation.
+
+Key features:
+- Auto-detects `/gh_issue` workflows via branch pattern
+- Captures git branch, uncommitted changes, and todo state
+- Generates structured markdown for pasting into new session
+- Includes continuation prompt for next session
+
+Usage:
+
+```bash
+/handoff
 ```
 
 ## Requirements (for `/gh_issue`)
