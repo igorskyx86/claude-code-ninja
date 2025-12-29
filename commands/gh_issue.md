@@ -91,6 +91,8 @@ Type: [Backend | Frontend | Full-stack | Infra]
 ## Phase 2: Planning & Design
 
 > 📝 **Mode**: Planning mode. Memory writes allowed.
+>
+> 💡 For complex issues, use `/ultrathink` before finalizing the implementation plan.
 
 ### Design Considerations
 
@@ -100,7 +102,7 @@ Type: [Backend | Frontend | Full-stack | Infra]
 - Check: configuration changes, breaking changes to interfaces
 
 **For Frontend Changes**:
-- Consider using `frontend-design` skill for UI/UX design
+- You must use `frontend-design` skill for UI/UX design
 - Consider: responsive behavior, accessibility
 - Follow project's design system/style guide if available
 
@@ -219,7 +221,7 @@ Before EVERY commit:
    - Security vulnerabilities
    - Adherence to project conventions
 
-2. **Consider using** `code-review` skill for additional review
+2. **You MUST use** `code-review` skill for additional review
 
 ### Address Review Findings
 - Fix all HIGH severity issues before proceeding
@@ -367,6 +369,9 @@ To resume later:
 2. Navigate to worktree: `cd ../worktrees/issue-<NUMBER>`
 3. Continue from last completed phase
 
+### If Wrong Direction Taken
+Use `Esc+Esc` or `/rewind` to checkpoint back to a known good state.
+
 ### If Tests Fail
 1. Fix failing tests
 2. Re-run code review
@@ -387,6 +392,12 @@ If something goes wrong after merge:
 git revert <merge-commit-sha>
 git push
 ```
+
+---
+
+## Context Health
+
+If context exceeds ~60%, use `/compact` or start a fresh conversation before proceeding to implementation phase.
 
 ---
 
