@@ -26,3 +26,4 @@ argument-hint: <PLACEHOLDER_TEXT>
 
 - `/gh_issue <ISSUE_URL_OR_NUMBER>` - Complete GitHub issue workflow with structured phases including validation, research, planning, implementation, QA, and PR creation
 - `/handoff` - Capture current session state for seamless continuation in a new conversation
+- `/explore <TOPIC_OR_QUESTION>` - Guided codebase exploration for understanding code before implementation (read-only)
