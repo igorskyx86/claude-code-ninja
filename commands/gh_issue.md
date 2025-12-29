@@ -65,10 +65,14 @@ Parse labels to determine approach:
     - Understand data flow and dependencies
 
 ### Clarification Checkpoint
-Ask clarifying questions if ANYTHING is unclear:
+- You must clarify questions if ANYTHING is unclear using the AskUserQuestionTool:
 - Expected behavior or edge cases
 - Technical approach preferences
 - Priority or scope constraints
+- UI & UX
+- Concerns
+- Tradeoffs
+Be very in-depth and keep on interviewing me continually until it's complete. Then capture this in the issue.
 
 ### Complexity Assessment
 After understanding, provide:
