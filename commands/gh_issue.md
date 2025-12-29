@@ -11,7 +11,36 @@ Work on the GitHub issue: $ARGUMENTS
 
 ---
 
+## State Tracking
+
+**CRITICAL**: Maintain workflow state using TodoWrite throughout ALL phases.
+
+### At Start of Each Phase
+Update todos to reflect current phase and pending tasks:
+```
+Phase X: [Phase Name]
+- [ ] Task 1
+- [ ] Task 2
+```
+
+### When User Asks Questions
+1. Answer the question
+2. Immediately check TodoWrite for current state
+3. Resume from the last incomplete task
+
+### Phase Checkpoint Format
+After completing each phase, update todos:
+```
+✅ Phase X: [Name] - COMPLETE
+🔄 Phase Y: [Name] - IN PROGRESS
+⏳ Phase Z: [Name] - PENDING
+```
+
+---
+
 ## Phase 0: Validation & Setup
+
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
 
 ### Issue Validation
 1. **Parse and validate** the issue URL  or number
@@ -46,6 +75,8 @@ Parse labels to determine approach:
 ## Phase 1: Research & Understanding (READ-ONLY)
 
 > 🔒 **Mode**: Read-only exploration. No file modifications allowed.
+>
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
 
 ### Deep Dive
 1. **Understand the requirement**:
@@ -93,6 +124,8 @@ Type: [Backend | Frontend | Full-stack | Infra]
 > 📝 **Mode**: Planning mode. Memory writes allowed.
 >
 > 💡 For complex issues, use `/ultrathink` before finalizing the implementation plan.
+>
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
 
 ### Design Considerations
 
@@ -151,6 +184,8 @@ Create a detailed plan with:
 
 ## Phase 3: Plan Review & Approval
 
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
+
 ### Post Plan to Issue
 1. Format the plan as a GitHub comment with collapsible sections
 2. Include complexity assessment and affected areas
@@ -173,7 +208,9 @@ Please review the implementation plan on GitHub and confirm:
 ## Phase 4: Implementation (Switch to Sonnet)
 
 > 🔧 **Mode**: Full file access. Execution mode.
- 
+>
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
+
 - You MUST use a worktree and create a PR even for the smallest changes.
 - You SHOULD NEVER make commits directly to master.
 
@@ -213,6 +250,8 @@ Before EVERY commit:
 ## Phase 5: Quality Assurance
 
 > ✅ **Mode**: Review and validation.
+>
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
 
 ### Code Review
 1. **Self-review** all changes for:
@@ -231,6 +270,8 @@ Before EVERY commit:
 ---
 
 ## Phase 6: Testing
+
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
 
 ### Automated Tests
 Run the project's test suite:
@@ -263,6 +304,8 @@ For UI changes, capture screenshot or GIF using Chrome for Claude browser automa
 ---
 
 ## Phase 7: Pull Request
+
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
 
 ### Prepare Branch
 ```bash
@@ -315,6 +358,8 @@ Add comment to issue with PR link and summary.
 ---
 
 ## Phase 8: Merge & Cleanup
+
+> 📌 **State**: Update TodoWrite with phase status and tasks before proceeding.
 
 ### Await Merge Approval
 ```
@@ -371,6 +416,12 @@ To resume later:
 
 ### If Wrong Direction Taken
 Use `Esc+Esc` or `/rewind` to checkpoint back to a known good state.
+
+### If User Asks Questions Mid-Workflow
+1. Answer the user's question
+2. Check TodoWrite for current phase and task
+3. Announce: "Resuming Phase X, Task Y..."
+4. Continue from last incomplete item
 
 ### If Tests Fail
 1. Fix failing tests
