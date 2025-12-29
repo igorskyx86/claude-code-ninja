@@ -167,6 +167,9 @@ Please review the implementation plan on GitHub and confirm:
 ## Phase 4: Implementation (Switch to Sonnet)
 
 > 🔧 **Mode**: Full file access. Execution mode.
+ 
+- You MUST use a worktree and create a PR even for the smallest changes.
+- You SHOULD NEVER make commits directly to master.
 
 ### Worktree Setup
 ```bash
