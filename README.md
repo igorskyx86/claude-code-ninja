@@ -6,93 +6,90 @@
 > Custom slash commands for [Claude Code](https://claude.ai/code) - Anthropic's AI coding assistant CLI.
 > Automate GitHub issue workflows, PR creation, and more.
 
-A collection of battle-tested Claude Code custom commands for common development workflows.
+A small collection of battle-tested Claude Code commands focused on GitHub issue workflows.
 
-## Installation
+## Why use it
 
-### Option 1: Clone to your global commands directory
+- Consistent, phase-based workflow for issues and PRs
+- Safer changes with explicit planning and approval gates
+- Less busywork: worktrees, issue comments, and PR creation are automated
+
+## Install
+
+1) Global (all projects)
 
 ```bash
-# Clone the repository
 git clone https://github.com/igorskyx86/claude-code-ninja.git
-
-# Symlink or copy commands to your global Claude Code commands directory
 mkdir -p ~/.claude/commands
 cp claude-code-ninja/commands/*.md ~/.claude/commands/
 ```
 
-### Option 2: Add to a specific project
+2) Project-only
 
 ```bash
-# From your project root
 mkdir -p .claude/commands
 cp path/to/claude-code-ninja/commands/*.md .claude/commands/
 ```
 
-### Option 3: Cherry-pick individual commands
-
-Copy just the commands you want:
+3) Single command
 
 ```bash
 curl -o ~/.claude/commands/gh_issue.md \
   https://raw.githubusercontent.com/igorskyx86/claude-code-ninja/main/commands/gh_issue.md
 ```
 
-## Available Commands
+## Quick start
+
+```bash
+git clone https://github.com/igorskyx86/claude-code-ninja.git
+mkdir -p ~/.claude/commands
+cp claude-code-ninja/commands/*.md ~/.claude/commands/
+
+# In Claude Code
+/gh_issue 42
+```
+
+## Commands
 
 ### `/gh_issue <ISSUE_URL_OR_NUMBER>`
 
 Complete GitHub issue workflow with structured phases, quality gates, and progress tracking.
 
-**What it does:**
+Workflow: validation -> research -> planning -> approval -> implementation -> QA -> testing -> PR -> cleanup
 
-| Phase | Description |
-|-------|-------------|
-| 0. Validation | Parse issue, detect existing work, check blockers |
-| 1. Research | Explore codebase, ask clarifying questions, assess complexity |
-| 2. Planning | Design solution, create implementation plan |
-| 3. Approval | Post plan to issue, wait for user approval |
-| 4. Implementation | TDD, incremental commits, progress updates |
-| 5. Quality | Code review, fix issues |
-| 6. Testing | Automated + Docker + manual verification |
-| 7. PR | Create pull request, link to issue |
-| 8. Cleanup | Merge, remove worktree, summarize |
-
-**Usage:**
-
-```bash
-# With issue number
-/gh_issue 42
-
-# With full URL
-/gh_issue https://github.com/owner/repo/issues/42
-```
-
-**Features:**
+Key features:
 - Creates isolated git worktrees for each issue
 - Posts implementation plans as GitHub comments
 - Waits for explicit approval before implementing
 - Follows conventional commit format
 - Handles merge conflicts and error recovery
 
-**Prerequisites:**
+Usage:
 
-| Dependency | Required | Purpose | Installation |
-|------------|----------|---------|--------------|
-| GitHub CLI (`gh`) | Yes | Issue fetching, PR creation | [Install guide](https://cli.github.com/) |
-| GitHub MCP Server | Yes | GitHub API integration | [Setup docs](https://github.com/modelcontextprotocol/servers/tree/main/src/github) |
-| `code-review` plugin | Yes | Phase 5 code review | `claude plugins:install code-review` |
-| `frontend-design` plugin | For UI work | Phase 2 UI/UX design | `claude plugins:install frontend-design` |
-| Chrome for Claude | Optional | Screenshots/GIFs of UI changes | [Extension](https://chromewebstore.google.com/detail/claude-in-chrome/) |
-
-**Quick setup:**
 ```bash
-# Install required plugins
-claude plugins:install code-review frontend-design
+/gh_issue 42
+/gh_issue https://github.com/owner/repo/issues/42
 ```
 
-**Also requires:**
-- Git repository with GitHub remote
+## Requirements (for `/gh_issue`)
+
+Required:
+- GitHub CLI (`gh`) - issue fetching and PR creation ([install guide](https://cli.github.com/))
+- GitHub MCP Server - GitHub API integration ([setup docs](https://github.com/modelcontextprotocol/servers/tree/main/src/github))
+- `code-review` plugin - Phase 5 code review (`claude plugins:install code-review`)
+
+Optional:
+- `frontend-design` plugin - UI/UX planning for frontend issues (`claude plugins:install frontend-design`)
+- Chrome for Claude - UI screenshots/GIFs ([extension](https://chromewebstore.google.com/detail/claude-in-chrome/))
+
+Also requires:
+- A Git repository with a GitHub remote
+
+Quick setup:
+
+```bash
+claude plugins:install code-review frontend-design
+```
 
 ## Customization
 
@@ -110,10 +107,6 @@ Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
 - Command file structure
 - Quality guidelines
 - Submitting new commands
-
-## Keywords
-
-`claude-code` `custom-commands` `slash-commands` `github-issues` `pull-requests` `developer-workflow` `automation` `anthropic` `ai-coding-assistant`
 
 ## License
 
