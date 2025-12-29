@@ -92,6 +92,32 @@ Quick setup:
 claude plugins:install code-review frontend-design
 ```
 
+## YOLO Mode (optional)
+
+Skip permission prompts for git/gh commands by copying the included settings to your project:
+
+```bash
+cp claude-code-ninja/.claude/settings.json .claude/
+```
+
+Or add to your global `~/.claude/settings.json`:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(git worktree:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rebase:*)",
+      "Bash(git push:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git revert:*)",
+      "Bash(gh pr create:*)"
+    ]
+  }
+}
+```
+
 ## Customization
 
 Commands are markdown files with YAML frontmatter. You can customize:
