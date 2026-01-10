@@ -38,8 +38,6 @@ Update todos at each phase transition:
 
 ## Phase 0: Validation
 
-> 📌 **State**: Update TodoWrite with phase status before proceeding.
-
 ### Issue Validation
 1. **Parse and validate** the issue URL or number
 2. **Fetch issue details** using `gh issue view`:
@@ -50,22 +48,20 @@ Update todos at each phase transition:
    - Warn if issue is CLOSED (offer to continue anyway)
 
 ### Issue Type Detection
-Detect type from labels or content analysis:
-| Type | Indicators |
-|------|------------|
-| `bug` | Labels: bug, defect. Keywords: broken, error, crash, regression |
-| `feature` | Labels: feature, enhancement. Keywords: add, new, implement |
-| `enhancement` | Labels: enhancement, improvement. Keywords: improve, update, refactor |
+Detect type from labels or content:
+| Type | Labels | Keywords |
+|------|--------|----------|
+| `bug` | bug, defect | broken, error, crash, regression |
+| `feature` | feature, enhancement | add, new, implement |
+| `enhancement` | enhancement, improvement | improve, update, refactor |
 
-If unclear, ask the user to confirm issue type.
+If unclear, ask the user to confirm.
 
 ---
 
-## Phase 1: Context Gathering (READ-ONLY)
+## Phase 1: Context Gathering
 
 > 🔒 **Mode**: Read-only exploration. No file modifications allowed.
->
-> 📌 **State**: Update TodoWrite before proceeding.
 
 ### Codebase Exploration
 1. **Explore relevant areas** using the `Explore` agent:
@@ -86,7 +82,6 @@ If unclear, ask the user to confirm issue type.
    - Check if this was previously attempted/closed
 
 ### Context Summary
-After gathering, summarize:
 ```
 📚 Context Summary
 ━━━━━━━━━━━━━━━━━
@@ -99,97 +94,69 @@ Project conventions: [key patterns noted]
 
 ## Phase 2: SME Analysis
 
-> 📌 **State**: Update TodoWrite before proceeding.
-
 Analyze the issue from each perspective and document findings.
 
 ### Product Manager Review
-Evaluate:
-- [ ] Is the business value clear?
-- [ ] Is the user impact defined?
-- [ ] Is priority justified?
-- [ ] Does it align with project goals?
-
-**Gaps identified**: [list]
+- [ ] Business value clear?
+- [ ] User impact defined?
+- [ ] Priority justified?
+- [ ] Aligns with project goals?
 
 ### Business Analyst Review
-Evaluate:
-- [ ] Is the problem statement clear?
-- [ ] Are requirements complete and unambiguous?
-- [ ] Are scope boundaries defined (what's in/out)?
-- [ ] Are there unstated assumptions?
-
-**Gaps identified**: [list]
+- [ ] Problem statement clear?
+- [ ] Requirements complete and unambiguous?
+- [ ] Scope boundaries defined (in/out)?
+- [ ] Assumptions stated?
 
 ### Tech Lead Review
-Evaluate:
-- [ ] Is this technically feasible?
-- [ ] Are there architecture implications?
-- [ ] Are dependencies identified?
-- [ ] Are there security considerations?
-- [ ] Is the scope realistic?
-
-**Gaps identified**: [list]
+- [ ] Technically feasible?
+- [ ] Architecture implications identified?
+- [ ] Dependencies listed?
+- [ ] Security considerations addressed?
+- [ ] Scope realistic?
 
 ### Test Lead Review
-Evaluate:
-- [ ] Are acceptance criteria testable?
-- [ ] Are edge cases considered?
-- [ ] Is the expected behavior clearly defined?
-- [ ] Can this be verified manually and/or automatically?
-
-**Gaps identified**: [list]
+- [ ] Acceptance criteria testable?
+- [ ] Edge cases considered?
+- [ ] Expected behavior defined?
+- [ ] Verification approach clear (manual/automated)?
 
 ### Analysis Summary
+Document gaps found per perspective:
 ```
 🔍 SME Analysis Complete
 ━━━━━━━━━━━━━━━━━━━━━━━
-Total gaps identified: [count]
-Critical gaps: [list]
-Minor gaps: [list]
+Total gaps: [count]
+Critical: [list]
+Minor: [list]
 ```
 
 ---
 
 ## Phase 3: User Interview
 
-> 📌 **State**: Update TodoWrite before proceeding.
-
 ### Interview Protocol
-1. **Present findings** to user:
-   - Show the gaps identified by each SME perspective
-   - Explain why each gap matters
-
+1. **Present findings**: Show gaps by perspective with explanations
 2. **Ask targeted questions** using AskUserQuestion:
-   - Group questions by SME perspective
-   - Prioritize critical gaps first
+   - Group by perspective, prioritize critical gaps
    - Use multiple rounds if needed
+3. **Continue until complete**: Track addressed gaps, follow up on vague answers
 
-3. **Continue until complete**:
-   - Track which gaps have been addressed
-   - Ask follow-up questions for vague answers
-   - Confirm understanding before moving on
-
-### Interview Rounds
-Repeat until all critical gaps are addressed:
-
+### Interview Format
 ```
 Round [N]: [Perspective] Questions
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[Ask 2-4 targeted questions per round]
+[2-4 targeted questions per round]
 ```
 
-### Capture Decisions
-Document all answers and decisions made during the interview for inclusion in the refined issue.
+Document all answers and decisions for the refined issue.
 
 ---
 
 ## Phase 4: Issue Restructuring
 
-> 📌 **State**: Update TodoWrite before proceeding.
-
 ### Template Selection
-Based on issue type, use the appropriate template:
+Select template based on issue type:
 
 <details>
 <summary><strong>Bug Template</strong></summary>
@@ -242,11 +209,9 @@ As a [type of user], I want [goal] so that [benefit].
 ## Scope
 ### In Scope
 - [Included item 1]
-- [Included item 2]
 
 ### Out of Scope
 - [Excluded item 1]
-- [Excluded item 2]
 
 ## Acceptance Criteria
 - [ ] [Criterion 1]
@@ -286,23 +251,15 @@ As a [type of user], I want [goal] so that [benefit].
 </details>
 
 ### Draft Generation
-1. Select template based on detected issue type
-2. Fill in all sections using:
-   - Original issue content
-   - Codebase context gathered
-   - Interview answers and decisions
-3. Include references to similar issues if found
-4. Preserve any valuable content from original issue
+1. Fill template using original issue, codebase context, and interview answers
+2. Include references to similar issues if found
+3. Preserve valuable content from original issue
 
 ---
 
 ## Phase 5: Review & Approval
 
-> 📌 **State**: Update TodoWrite before proceeding.
-
 ### Present Draft
-Display the complete refined issue to the user:
-
 ```
 📝 Refined Issue Draft
 ━━━━━━━━━━━━━━━━━━━━━
@@ -312,32 +269,24 @@ Display the complete refined issue to the user:
 
 ### Approval Gate
 ```
-Please review the refined issue above.
-
-→ "approve" - Update the GitHub issue with this content
-→ "revise [feedback]" - Make changes based on your feedback
-→ "cancel" - Discard changes and keep original issue
+→ "approve" - Update the GitHub issue
+→ "revise [feedback]" - Make changes
+→ "cancel" - Keep original issue
 ```
 
-**⏸️ WAIT for explicit user approval before updating the issue.**
+**WAIT for explicit user approval before updating.**
 
-### Handle Revisions
-If user requests changes:
-1. Incorporate feedback
-2. Show updated draft
-3. Return to approval gate
+If user requests revisions: incorporate feedback, show updated draft, return to approval gate.
 
 ---
 
 ## Phase 6: Update Issue
 
-> 📌 **State**: Update TodoWrite before proceeding.
-
 ### Update GitHub Issue
-Once approved, use HEREDOC to handle special characters:
+Use HEREDOC to handle special characters:
 ```bash
 gh issue edit <NUMBER> --body "$(cat <<'EOF'
-<refined content goes here>
+<refined content>
 EOF
 )"
 ```
@@ -349,8 +298,6 @@ gh issue comment <NUMBER> --body "$(cat <<'EOF'
 
 **Perspectives applied**: PM, BA, Tech Lead, Test Lead
 **Gaps addressed**: [count]
-
-The issue body has been updated with a structured format.
 EOF
 )"
 ```
@@ -359,29 +306,18 @@ EOF
 ```
 ✅ Issue #<NUMBER> Review Complete
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Issue type: [bug/feature/enhancement]
-Perspectives applied: PM, BA, Tech Lead, Test Lead
-Gaps identified: [count]
-Gaps addressed: [count]
-Similar issues found: [count or "None"]
-
-Issue updated: https://github.com/<owner>/<repo>/issues/<NUMBER>
+Type: [bug/feature/enhancement]
+Gaps: [identified] → [addressed]
+Similar issues: [count or "None"]
+URL: https://github.com/<owner>/<repo>/issues/<NUMBER>
 ```
 
 ---
 
 ## Error Recovery
 
-### If Interview Interrupted
-1. Check TodoWrite for current state
-2. Resume from last incomplete question round
-3. Recap previous answers before continuing
-
-### If User Wants to Start Over
-Offer options:
-- Restart from Phase 2 (re-analyze)
-- Restart from Phase 3 (re-interview)
-- Cancel entirely
+- **Interview interrupted**: Check TodoWrite, resume from last incomplete round, recap previous answers
+- **Start over**: Offer restart from Phase 2 (re-analyze) or Phase 3 (re-interview)
 
 ---
 
@@ -399,9 +335,9 @@ Offer options:
 
 ---
 
-## Tips
+## Writing Style
 
-- Be thorough in the interview phase - missing information leads to poor issues
+- Be thorough in interviews - missing information leads to poor issues
 - Preserve valuable content from the original issue
 - Link to related issues even if not duplicates
 - Use code references (file:line) when discussing technical aspects
