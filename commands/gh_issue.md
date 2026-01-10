@@ -267,6 +267,19 @@ Before EVERY commit:
 - Document MEDIUM issues with justification if not fixing
 - LOW issues are optional but recommended
 
+### Code Simplification
+After addressing code review findings, run the code-simplifier agent to polish the implementation:
+
+1. **You MUST use** `code-simplifier` agent to refine recently modified code
+2. The agent will automatically:
+   - Improve clarity and maintainability
+   - Apply project conventions
+   - Preserve all functionality
+3. **Commit simplifications** separately:
+   ```
+   refactor(scope): code simplification
+   ```
+
 ---
 
 ## Phase 6: Testing
@@ -461,7 +474,7 @@ If context exceeds ~60%, use `/compact` or start a fresh conversation before pro
 | 2. Planning | Opus | Planning | Design review, create implementation plan |
 | 3. Approval | Opus | Gate | Post plan, wait for user approval |
 | 4. Implementation | Sonnet | Execute | TDD, incremental commits, progress updates |
-| 5. Quality | Sonnet | Review | Code review, fix issues |
+| 5. Quality | Sonnet | Review | Code review, fix issues, code simplification |
 | 6. Testing | Sonnet | Test | Automated + Docker + manual |
 | 7. PR | Sonnet | Create | Push, create PR, link to issue |
 | 8. Cleanup | Sonnet | Gate | Merge, cleanup, summarize |
