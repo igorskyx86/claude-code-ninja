@@ -1,6 +1,6 @@
 ---
 description: Review and refine GitHub issues with PM, BA, Tech Lead, and Test Lead perspectives
-allowed-tools: Task, Bash, Read, Glob, Grep, TodoWrite, AskUserQuestion, WebFetch
+allowed-tools: Task, Bash, Read, Glob, Grep, TodoWrite, AskUserQuestion, WebFetch, Skill, mcp__github__*
 model: opus
 argument-hint: <ISSUE_URL_OR_NUMBER>
 ---
@@ -334,19 +334,25 @@ If user requests changes:
 > 📌 **State**: Update TodoWrite before proceeding.
 
 ### Update GitHub Issue
-Once approved:
+Once approved, use HEREDOC to handle special characters:
 ```bash
-gh issue edit <NUMBER> --body "<refined content>"
+gh issue edit <NUMBER> --body "$(cat <<'EOF'
+<refined content goes here>
+EOF
+)"
 ```
 
 ### Add Review Comment
 ```bash
-gh issue comment <NUMBER> --body "🔍 Issue reviewed and refined using /gh_issue_review command.
+gh issue comment <NUMBER> --body "$(cat <<'EOF'
+🔍 Issue reviewed and refined using /gh_issue_review command.
 
 **Perspectives applied**: PM, BA, Tech Lead, Test Lead
 **Gaps addressed**: [count]
 
-The issue body has been updated with a structured format."
+The issue body has been updated with a structured format.
+EOF
+)"
 ```
 
 ### Completion Summary
