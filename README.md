@@ -113,6 +113,7 @@ Required:
 - GitHub CLI (`gh`) - issue fetching and PR creation ([install guide](https://cli.github.com/))
 - GitHub MCP Server - GitHub API integration ([setup docs](https://github.com/modelcontextprotocol/servers/tree/main/src/github))
 - `code-review` plugin - Phase 5 code review (`claude plugins:install code-review`)
+- `code-simplifier` plugin - Phase 5 code simplification (`claude plugins:install code-simplifier`)
 
 Optional:
 - `frontend-design` plugin - UI/UX planning for frontend issues (`claude plugins:install frontend-design`)
@@ -124,7 +125,7 @@ Also requires:
 Quick setup:
 
 ```bash
-claude plugins:install code-review frontend-design
+claude plugins:install code-review code-simplifier frontend-design
 ```
 
 ## YOLO Mode (optional)
