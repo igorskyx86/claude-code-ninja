@@ -72,6 +72,27 @@ Usage:
 /gh_issue https://github.com/owner/repo/issues/42
 ```
 
+### `/gh_issue_review <ISSUE_URL_OR_NUMBER>`
+
+Review and refine GitHub issues with multiple SME perspectives before implementation.
+
+Workflow: validation -> context gathering -> SME analysis -> user interview -> restructure -> approval -> update
+
+Key features:
+- Applies PM, BA, Tech Lead, and Test Lead perspectives
+- Explores codebase for context-aware feedback
+- Searches for similar/duplicate issues
+- Comprehensive user interview to fill gaps
+- Adapts issue format based on type (bug/feature/enhancement)
+- Requires explicit approval before updating the issue
+
+Usage:
+
+```bash
+/gh_issue_review 42
+/gh_issue_review https://github.com/owner/repo/issues/42
+```
+
 ### `/explore <TOPIC_OR_QUESTION>`
 
 Guided codebase exploration for understanding code before implementation. Strictly read-only.

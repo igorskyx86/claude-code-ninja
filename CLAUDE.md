@@ -25,5 +25,6 @@ argument-hint: <PLACEHOLDER_TEXT>
 ## Available Commands
 
 - `/gh_issue <ISSUE_URL_OR_NUMBER>` - Complete GitHub issue workflow with structured phases including validation, research, planning, implementation, QA, and PR creation
+- `/gh_issue_review <ISSUE_URL_OR_NUMBER>` - Review and refine GitHub issues with PM, BA, Tech Lead, and Test Lead perspectives
 - `/handoff` - Capture current session state for seamless continuation in a new conversation
 - `/explore <TOPIC_OR_QUESTION>` - Guided codebase exploration for understanding code before implementation (read-only)
