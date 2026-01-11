@@ -245,6 +245,12 @@ Before EVERY commit:
 - [ ] No `TODO` or `FIXME` without issue reference
 - [ ] Breaking changes documented
 
+### Cancellation Tracking
+If the user explicitly requests to skip or cancel a task during implementation:
+- Note the cancelled task for later checkbox update
+- Continue with remaining tasks
+- Cancelled tasks will be marked with strikethrough at completion
+
 ---
 
 ## Phase 5: Quality Assurance
@@ -394,6 +400,37 @@ Please review and confirm:
 2. Verify issue auto-closed (or close manually)
 3. Confirm deployment triggered (if applicable)
 
+### Task Status Update
+After merge, update task checkboxes in the issue and implementation plan comment:
+
+1. **Match tasks to TodoWrite status**:
+   - Compare each checkbox in the issue/comment against TodoWrite tasks
+   - Use fuzzy text matching (task descriptions don't need to be exact)
+
+2. **Update issue body** (if it contains checkboxes):
+   - For completed tasks: change `- [ ]` to `- [x]`
+   - For cancelled tasks: wrap in strikethrough `- ~~Task description~~`
+   - If no checkboxes exist in issue body, skip this step
+
+3. **Update implementation plan comment**:
+   - Locate the plan comment posted in Phase 3
+   - Apply same checkbox updates as issue body
+   - Use `gh api` to update the comment:
+   ```bash
+   # Get comment ID from Phase 3
+   gh api repos/{owner}/{repo}/issues/<NUMBER>/comments \
+     --jq '.[] | select(.body | contains("Implementation Plan")) | .id'
+
+   # Update comment with checked boxes
+   gh api repos/{owner}/{repo}/issues/comments/<COMMENT_ID> \
+     -X PATCH -f body="<UPDATED_BODY>"
+   ```
+
+4. **Update issue body** (if applicable):
+   ```bash
+   gh issue edit <NUMBER> --body "<UPDATED_BODY>"
+   ```
+
 ### Cleanup
 ```bash
 # Remove worktree
@@ -473,11 +510,11 @@ If context exceeds ~60%, use `/compact` or start a fresh conversation before pro
 | 1. Research | Opus | Read-only | Explore code, ask questions, assess complexity |
 | 2. Planning | Opus | Planning | Design review, create implementation plan |
 | 3. Approval | Opus | Gate | Post plan, wait for user approval |
-| 4. Implementation | Sonnet | Execute | TDD, incremental commits, progress updates |
+| 4. Implementation | Sonnet | Execute | TDD, incremental commits, progress updates, track cancellations |
 | 5. Quality | Sonnet | Review | Code review, fix issues, code simplification |
 | 6. Testing | Sonnet | Test | Automated + Docker + manual |
 | 7. PR | Sonnet | Create | Push, create PR, link to issue |
-| 8. Cleanup | Sonnet | Gate | Merge, cleanup, summarize |
+| 8. Cleanup | Sonnet | Gate | Merge, update task checkboxes, cleanup, summarize |
 
 ---
 
