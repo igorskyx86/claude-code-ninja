@@ -169,6 +169,11 @@ Or add to your global `~/.claude/settings.json`:
       "Bash(git push:*)",
       "Bash(git branch -D:*)",
       "Bash(git revert:*)",
+      "Bash(gh issue close:*)",
+      "Bash(gh issue comment:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue edit:*)",
+      "Bash(gh issue view:*)",
       "Bash(gh pr create:*)"
     ]
   }
