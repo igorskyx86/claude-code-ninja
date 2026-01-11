@@ -246,10 +246,10 @@ Before EVERY commit:
 - [ ] Breaking changes documented
 
 ### Cancellation Tracking
-If the user explicitly requests to skip or cancel a task during implementation:
-- Note the cancelled task for later checkbox update
+When user requests to skip or cancel a task:
+- Track the cancelled task for later checkbox update
 - Continue with remaining tasks
-- At completion, cancelled tasks will be marked as `- [ ] ~~Task~~` (strikethrough with unchecked box)
+- Mark cancelled tasks as `- [ ] ~~Task~~` at completion
 
 ---
 
@@ -401,33 +401,23 @@ Please review and confirm:
 3. Confirm deployment triggered (if applicable)
 
 ### Task Status Update
-After merge, update task checkboxes in the issue and implementation plan comment:
+After merge, update checkboxes in the issue body and implementation plan comment:
 
-1. **Match tasks to TodoWrite status**:
-   - Compare each checkbox in the issue/comment against TodoWrite tasks
-   - Use fuzzy text matching (task descriptions don't need to be exact)
+**Checkbox conventions**:
+- Completed: `- [ ]` → `- [x]`
+- Cancelled: `- [ ] Task` → `- [ ] ~~Task~~`
 
-2. **Determine checkbox updates**:
-   - For completed tasks: `- [ ]` → `- [x]`
-   - For cancelled tasks: `- [ ] Task` → `- [ ] ~~Task~~` (checkbox retained, text struck through)
-   - If no checkboxes exist in issue body, skip body update
-
-3. **Update implementation plan comment**:
-   - Locate the plan comment posted in Phase 3
-   - Apply checkbox updates
+**Update process**:
+1. Match checkboxes to TodoWrite status (fuzzy text matching is fine)
+2. Update implementation plan comment from Phase 3:
    ```bash
-   # Get comment ID
    gh api repos/{owner}/{repo}/issues/{number}/comments \
      --jq '.[] | select(.body | contains("Implementation Plan")) | .id'
-
-   # Update comment
-   gh api repos/{owner}/{repo}/issues/comments/{comment_id} \
-     -X PATCH -f body="<UPDATED_BODY>"
+   gh api repos/{owner}/{repo}/issues/comments/{comment_id} -X PATCH -f body="..."
    ```
-
-4. **Update issue body** (if it contains checkboxes):
+3. Update issue body if it contains checkboxes:
    ```bash
-   gh issue edit {number} --body "<UPDATED_BODY>"
+   gh issue edit {number} --body "..."
    ```
 
 ### Cleanup
