@@ -249,7 +249,7 @@ Before EVERY commit:
 If the user explicitly requests to skip or cancel a task during implementation:
 - Note the cancelled task for later checkbox update
 - Continue with remaining tasks
-- Cancelled tasks will be marked with strikethrough at completion
+- At completion, cancelled tasks will be marked as `- [ ] ~~Task~~` (strikethrough with unchecked box)
 
 ---
 
@@ -407,28 +407,27 @@ After merge, update task checkboxes in the issue and implementation plan comment
    - Compare each checkbox in the issue/comment against TodoWrite tasks
    - Use fuzzy text matching (task descriptions don't need to be exact)
 
-2. **Update issue body** (if it contains checkboxes):
-   - For completed tasks: change `- [ ]` to `- [x]`
-   - For cancelled tasks: wrap in strikethrough `- ~~Task description~~`
-   - If no checkboxes exist in issue body, skip this step
+2. **Determine checkbox updates**:
+   - For completed tasks: `- [ ]` → `- [x]`
+   - For cancelled tasks: `- [ ] Task` → `- [ ] ~~Task~~` (checkbox retained, text struck through)
+   - If no checkboxes exist in issue body, skip body update
 
 3. **Update implementation plan comment**:
    - Locate the plan comment posted in Phase 3
-   - Apply same checkbox updates as issue body
-   - Use `gh api` to update the comment:
+   - Apply checkbox updates
    ```bash
-   # Get comment ID from Phase 3
-   gh api repos/{owner}/{repo}/issues/<NUMBER>/comments \
+   # Get comment ID
+   gh api repos/{owner}/{repo}/issues/{number}/comments \
      --jq '.[] | select(.body | contains("Implementation Plan")) | .id'
 
-   # Update comment with checked boxes
-   gh api repos/{owner}/{repo}/issues/comments/<COMMENT_ID> \
+   # Update comment
+   gh api repos/{owner}/{repo}/issues/comments/{comment_id} \
      -X PATCH -f body="<UPDATED_BODY>"
    ```
 
-4. **Update issue body** (if applicable):
+4. **Update issue body** (if it contains checkboxes):
    ```bash
-   gh issue edit <NUMBER> --body "<UPDATED_BODY>"
+   gh issue edit {number} --body "<UPDATED_BODY>"
    ```
 
 ### Cleanup
