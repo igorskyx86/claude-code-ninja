@@ -245,6 +245,12 @@ Before EVERY commit:
 - [ ] No `TODO` or `FIXME` without issue reference
 - [ ] Breaking changes documented
 
+### Cancellation Tracking
+When user requests to skip or cancel a task:
+- Track the cancelled task for later checkbox update
+- Continue with remaining tasks
+- Mark cancelled tasks as `- [ ] ~~Task~~` at completion
+
 ---
 
 ## Phase 5: Quality Assurance
@@ -394,6 +400,26 @@ Please review and confirm:
 2. Verify issue auto-closed (or close manually)
 3. Confirm deployment triggered (if applicable)
 
+### Task Status Update
+After merge, update checkboxes in the issue body and implementation plan comment:
+
+**Checkbox conventions**:
+- Completed: `- [ ]` → `- [x]`
+- Cancelled: `- [ ] Task` → `- [ ] ~~Task~~`
+
+**Update process**:
+1. Match checkboxes to TodoWrite status (fuzzy text matching is fine)
+2. Update implementation plan comment from Phase 3:
+   ```bash
+   gh api repos/{owner}/{repo}/issues/{number}/comments \
+     --jq '.[] | select(.body | contains("Implementation Plan")) | .id'
+   gh api repos/{owner}/{repo}/issues/comments/{comment_id} -X PATCH -f body="..."
+   ```
+3. Update issue body if it contains checkboxes:
+   ```bash
+   gh issue edit {number} --body "..."
+   ```
+
 ### Cleanup
 ```bash
 # Remove worktree
@@ -473,11 +499,11 @@ If context exceeds ~60%, use `/compact` or start a fresh conversation before pro
 | 1. Research | Opus | Read-only | Explore code, ask questions, assess complexity |
 | 2. Planning | Opus | Planning | Design review, create implementation plan |
 | 3. Approval | Opus | Gate | Post plan, wait for user approval |
-| 4. Implementation | Sonnet | Execute | TDD, incremental commits, progress updates |
+| 4. Implementation | Sonnet | Execute | TDD, incremental commits, progress updates, track cancellations |
 | 5. Quality | Sonnet | Review | Code review, fix issues, code simplification |
 | 6. Testing | Sonnet | Test | Automated + Docker + manual |
 | 7. PR | Sonnet | Create | Push, create PR, link to issue |
-| 8. Cleanup | Sonnet | Gate | Merge, cleanup, summarize |
+| 8. Cleanup | Sonnet | Gate | Merge, update task checkboxes, cleanup, summarize |
 
 ---
 
