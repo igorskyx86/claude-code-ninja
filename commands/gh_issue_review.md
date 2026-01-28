@@ -318,6 +318,7 @@ URL: https://github.com/<owner>/<repo>/issues/<NUMBER>
 
 - **Interview interrupted**: Check TodoWrite, resume from last incomplete round, recap previous answers
 - **Start over**: Offer restart from Phase 2 (re-analyze) or Phase 3 (re-interview)
+- **Wrong direction**: Use `Esc+Esc` or `/rewind` to checkpoint back to a known good state
 
 ---
 

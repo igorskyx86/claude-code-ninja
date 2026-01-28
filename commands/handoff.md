@@ -2,6 +2,7 @@
 description: Capture session state for seamless continuation in a new conversation
 allowed-tools: Read, Bash, Glob, TodoWrite
 model: haiku
+argument-hint: (no arguments needed)
 ---
 
 # Session Handoff
