@@ -13,7 +13,8 @@ Explore and understand: **$ARGUMENTS**
 
 ## Mode
 
-> **READ-ONLY**: No file modifications allowed. This is a learning exercise.
+> **Phases 1-3**: Read-only exploration. No file modifications.
+> **Phase 4**: Allows saving results to file or GitHub issue.
 
 ---
 
@@ -138,7 +139,7 @@ If user wants to continue, loop back to Phase 2 with the new topic.
 
 | Aspect | Details |
 |--------|---------|
-| Mode | READ-ONLY |
+| Mode | Phases 1-3 read-only, Phase 4 allows output |
 | Depth | Thorough by default |
 | Output | Console, file, or GitHub issue |
 | Follow-ups | Offered after each exploration |
@@ -151,7 +152,7 @@ If user wants to continue, loop back to Phase 2 with the new topic.
 
 | /explore | /gh_issue |
 |----------|-----------|
-| READ-ONLY | Creates worktree, commits, PR |
+| Read-only exploration, optional output | Creates worktree, commits, PR |
 | Understanding | Execution |
 | Question -> Knowledge | Issue -> PR |
 | No git changes | Full git workflow |
